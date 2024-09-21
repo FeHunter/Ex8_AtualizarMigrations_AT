@@ -8,7 +8,11 @@ builder.Services.AddControllersWithViews();
 
 // Configura o contexto do banco de dados com SQLite
 builder.Services.AddDbContext<Contexto>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    // Inicializando SQLite
+    SQLitePCL.Batteries.Init();
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
